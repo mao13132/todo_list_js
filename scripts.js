@@ -55,7 +55,7 @@ function addTask(text, list_tasks) {
     taskRender(list_tasks)
 }
 
-function _render_html_row(task) {
+function _render_html_row(task, idx) {
     return `<div id="${task.id}" class="${task.isComplete ? 'todo__task todo_task_complete' : 'todo__task'}">
                         
                 <label class="todo__checkbox">
@@ -63,7 +63,7 @@ function _render_html_row(task) {
                     <div class="todo__checkbox-div"></div>
                 </label>
 
-                <div class="todo__task-text">${task.text}
+                <div class="todo__task-text"><strong>#${idx + 1}</strong> ${task.text}
                 </div>
 
                 <div class="todo_task-del">-</div>
@@ -83,9 +83,12 @@ function change_status(id_task, list_tasks) {
 
 // Функция рендеринга списка задач
 function taskRender(task_list) {
-    const html_task_list = task_list.map(_render_html_row).join('');
+    const html_task_list = task_list.map((task, idx) => _render_html_row(task, idx)).join('');
+
     dom.tasks.innerHTML = html_task_list;
+
     renderTaskCount(tasks);
+
     save_local_task_list(tasks);
 }
 
