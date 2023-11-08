@@ -5,7 +5,10 @@ const dom = {
     count: document.getElementById('count')
 }
 
-const tasks = []
+const tasks = JSON.parse(localStorage.getItem('list_task')) || [];
+
+if (tasks) {taskRender(tasks);}
+
 
 // Отслеживает клик по кнопке Добавить задачу
 dom.add.onclick = () => {
@@ -76,6 +79,7 @@ function taskRender(task_list) {
     const html_task_list = task_list.map(_render_html_row).join('');
     dom.tasks.innerHTML = html_task_list;
     renderTaskCount(tasks);
+    save_local_task_list(tasks);
 }
 
 //Функциия отлова клика по родительскому классу
@@ -138,4 +142,8 @@ function delete_task(id_task, list_task) {
 //render count
 function renderTaskCount(list_task) {
     dom.count.innerHTML = list_task.length;
+}
+
+function save_local_task_list (list_task) {
+    localStorage.setItem('list_task', JSON.stringify(list_task));
 }
