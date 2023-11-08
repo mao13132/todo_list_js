@@ -1,0 +1,132 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@200;300;400;500;600;700;800;900&display=swap');
+
+:root {
+    --accent: #EA5959;   /*Главный цвет красный*/
+    --default: rgba(0,0,0, 0.3);
+}
+
+* {
+    margin: 0;
+    box-sizing: border-box; /*Что бы размер входил в экран, убирает отступы*/
+}
+
+body {
+    font-family: 'Nunito', sans-serif;  /* Применить шрифт*/
+    background-color: var(--accent);
+    height: 100vh; /*На всю высоту экрана*/
+    display: flex;  /*Выравнивание специальное для растягивания*/
+    justify-content: center;
+    padding: 32px;
+    font-size: 18px;
+    font-weight: 300; /*Толщина*/
+}
+
+.todo {
+    padding: 32px;  /*отступы по краям*/
+    background-color: #fff;
+    width: 90vw;
+    border-radius: 16px;
+}
+
+.todo__content {
+}
+.todo__title {
+}
+.todo__new {
+    --size: 50px;
+    display: flex;
+    margin: 16px 0 32px;    /*16 c верху 0 с боков 32 с низу*/
+    /*outline: 1px solid red;*/ /*Подкрашивает и тем самым выделяет эллемент*/
+}
+.todo__new input {
+    margin-right: 16px; /*Отступ с права*/
+    font-size: 18px;
+    padding: 8px 16px;
+    height: var(--size);
+    border: 1px solid var(--default); /*Обводка*/
+    border-radius: 5px;
+    flex-grow: 1;   /*т.к. род див флекс тогда мы можем занять всё место свободное*/
+}
+
+.todo__add,
+.todo_task-del {
+    cursor: pointer;    /*при накводке курсор меняется*/
+    text-align: center;     /*Выравнить содержимое по центру горизонт*/
+    height: var(--size);
+    width: var(--size);
+    border-radius: var(--size);
+    line-height: calc(var(--size) * 0.95);   /*Меж строчный интервал что бы по вертикали выровнить*/
+    font-size: 32px;
+    font-weight: 200;
+    background: var(--accent);
+    color: white;
+    /*border: 1px solid var(--default); */ /*Обводка*/
+}
+
+.todo__list > *:not(:last-child) {   /*Это значит только первый внутренем чилдренам и не являются последнем ребёнком*/
+    margin-bottom: 8px;     /*Расстояние между эллементами*/
+}
+.todo__task {
+    cursor: default;    /*При наведение обычный курсор*/
+    --size: 36px;
+    display: flex;  /*Всё содердимое блока ровняет в 1 строку*/
+    min-height: var(--size);    /*Минимальная высота таски*/
+    align-items: center;    /*Выровнить по цетру все дчерние эллементы по вертикали*/
+    /*outline: 1px solid red; */ /*обвести эллемент*/
+}
+.todo__task:hover .todo_task-del {  /*Когда навожу на todo_task то класс с кнопкой принимает дисплей блок*/
+    display: block;
+}
+.todo_task_complete .todo__task-text { /*Если стоит класс комплит то классу таст текст*/
+    text-decoration: line-through;
+    color: var(--default);
+}
+.todo__checkbox {
+    margin-right: 16px;
+}
+.todo__checkbox input {
+    display: none;
+}
+.todo__checkbox input:checked + div { /*Импут у которого состояние чекед, и плюс означает следующий эллемент*/
+    background-color: var(--accent);
+}
+.todo__checkbox input:checked + div::after {
+    display: block;
+}
+.todo__checkbox div {
+    cursor: pointer;
+    --size: 28px;
+    height: var(--size);
+    width: var(--size);
+    border: 1px solid var(--accent);
+    border-radius: 4px; /*Сгругление*/
+    position: relative;     /*Для псевдоэмллемента*/
+    color: white;
+}
+.todo__checkbox div::after {    /*Сам псевдоэллемент*/
+    content: '\1F5F8';
+    text-align: center;
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+.todo__task-text {
+    font-size: 20px;
+}
+.todo_task-del {
+    display: none; /*для эффекта наводки стартовое состояние*/
+    margin-left: auto;  /*максимально в право улетает*/
+    line-height: calc(var(--size) * 0.88);   /*Меж строчный интервал что бы по вертикали выровнить*/
+    margin-right: 0;
+    font-size: 44px;
+    
+}
+.todo__tasks-count {
+    margin-top: 20px;;
+}
+.hr {
+    margin-bottom: 20px;
+}
