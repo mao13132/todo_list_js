@@ -5,19 +5,26 @@ const dom = {
     count: document.getElementById('count')
 }
 
+const _test = document.querySelector('[id="new"]').addEventListener('keydown', function (event) {
+    if (event.keyCode === 13) {add_task();}
+});
+
 const tasks = JSON.parse(localStorage.getItem('list_task')) || [];
 
 if (tasks) {taskRender(tasks);}
 
-
-// Отслеживает клик по кнопке Добавить задачу
-dom.add.onclick = () => {
+function add_task () {
     const task = dom.new.value;
     
     if (task) {
         addTask(task, tasks);
         dom.new.value = '';
     }
+}
+
+// Отслеживает клик по кнопке Добавить задачу
+dom.add.onclick = () => {
+    add_task()
 }
 
 // Проверка на существования задачи с таким же текстом
